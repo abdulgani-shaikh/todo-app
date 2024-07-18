@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke
+        android:width="2dp"
+        android:color="@color/completed_color"
+        />
+    <corners
+        android:radius="@dimen/card_default_radius"/>
+    <solid
+        android:color="@color/complete_background"/>
+</shape>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ActivityAddTodo">
+
+    <include
+        android:id="@+id/add_todo_toolbar"
+        layout="@layout/appbar_default"/>
+
+    <EditText
+        android:id="@+id/title_add_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        app:layout_constraintTop_toBottomOf="@id/add_todo_toolbar"
+        android:hint="@string/hint_title"
+        style="@style/EditTextDefaultStyle"
+        />
+
+    <EditText
+        android:id="@+id/subtitle_add_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_subtitle"
+        app:layout_constraintTop_toBottomOf="@id/title_add_edt"
+        style="@style/EditTextDefaultStyle"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_todo_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/subtitle_add_edt"
+        android:text="@string/add"
+        style="@style/ButtonDefaultStyle"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

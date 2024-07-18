@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/appbar_root"
+    android:backgroundTint="@color/primaryColor">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_home"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:titleTextColor="@color/white"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/white"
+        app:menu="@menu/toolbar_main_menu"
+        />
+
+
+</com.google.android.material.appbar.AppBarLayout>
