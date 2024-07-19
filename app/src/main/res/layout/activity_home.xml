@@ -11,6 +11,7 @@
         android:id="@+id/appbar_home"
         layout="@layout/appbar_all_todo"/>
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/all_todo_rv"
         android:layout_width="match_parent"
@@ -22,18 +23,33 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/add_todo_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_horizontal_space"
         android:backgroundTint="@color/primaryColor"
         android:contentDescription="@string/add_todo"
-        android:src="@drawable/ic_add"
+        app:icon="@drawable/ic_add"
+        android:text="@string/add_todo"
         android:layout_gravity="bottom|end"
         app:shapeAppearanceOverlay="@style/FabRounded"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomNavView"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/clear_filter_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_horizontal_space"
+        android:backgroundTint="@color/primaryColor"
+        android:contentDescription="@string/add_todo"
+        app:icon="@drawable/ic_calender"
+        android:text="@string/clear_date_filter"
+        android:layout_gravity="bottom|end"
+        app:shapeAppearanceOverlay="@style/FabRounded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/add_todo_fab"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavView"

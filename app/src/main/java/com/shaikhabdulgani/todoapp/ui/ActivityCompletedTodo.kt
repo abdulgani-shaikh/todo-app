@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shaikhabdulgani.todoapp.adapter.TodoAdapter
 import com.shaikhabdulgani.todoapp.database.AppDatabase
@@ -11,6 +12,8 @@ import com.shaikhabdulgani.todoapp.databinding.ActivityCompletedTodoBinding
 import com.shaikhabdulgani.todoapp.repo.TodoRepo
 import com.shaikhabdulgani.todoapp.viewmodel.HomeViewModel
 import com.shaikhabdulgani.todoapp.viewmodel.factory.HomeViewModelFactory
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class ActivityCompletedTodo : AppCompatActivity() {
 
@@ -58,8 +61,15 @@ class ActivityCompletedTodo : AppCompatActivity() {
     }
 
     private fun setUpObserver() {
-        viewModel.getAllTodo().observe(this) { todoList ->
-            todoAdapter.differList.submitList(todoList.filter { it.isCompleted })
+        viewModel.getAllTodo()
+//        lifecycleScope.launch {
+//            viewModel.todo.collectLatest {
+//                todoAdapter.setList(it.filter { todo -> todo.isCompleted })
+////                todoAdapter.differList.submitList(it.filter { todo -> todo.isCompleted })
+//            }
+//        }
+        viewModel.todo.observe(this){
+            todoAdapter.setList(it.filter { todo -> todo.isCompleted })
         }
     }
 }

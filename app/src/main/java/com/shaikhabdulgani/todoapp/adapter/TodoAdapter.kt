@@ -17,14 +17,22 @@ import com.shaikhabdulgani.todoapp.databinding.ItemTodoBinding
 class TodoAdapter(private val actionBtnVisible: Boolean = true) :
     RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
 
+    companion object {
+        const val TAG = "TodoAdapter"
+    }
+
     interface TodoClickListener {
         fun onEditClick(position: Int)
         fun onDeleteClick(position: Int)
         fun onCompleteClick(position: Int)
     }
 
-    companion object {
-        const val TAG = "TodoAdapter"
+    fun setList(list: List<Todo>) {
+        this.differList.submitList(list)
+    }
+
+    fun getItem(position: Int): Todo {
+        return differList.currentList[position]
     }
 
     private var listener: TodoClickListener = object : TodoClickListener {
@@ -55,7 +63,7 @@ class TodoAdapter(private val actionBtnVisible: Boolean = true) :
         }
     }
 
-    val differList = AsyncListDiffer(this, diffCallBack)
+    private val differList = AsyncListDiffer(this, diffCallBack)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         return TodoViewHolder(
@@ -73,17 +81,27 @@ class TodoAdapter(private val actionBtnVisible: Boolean = true) :
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val todo = differList.currentList[position]
-        holder.binding.apply {
-            todoTitleText.text = todo.title
-            todoSubtitleText.text = todo.subtitle
-            if (todo.isCompleted) {
-                rootLayout.background = ContextCompat.getDrawable(root.context,R.drawable.completed_todo_background)
-                actionBtnGroup.visibility = View.GONE
-            }
-        }
+        holder.bind(todo)
     }
 
-    inner class TodoViewHolder(val binding: ItemTodoBinding) : ViewHolder(binding.root) {
+    inner class TodoViewHolder(private val binding: ItemTodoBinding) : ViewHolder(binding.root) {
+        fun bind(todo: Todo) {
+            binding.apply {
+                todoTitleText.text = todo.title
+                todoSubtitleText.text = todo.subtitle
+                if (todo.isCompleted) {
+                    rootLayout.background =
+                        ContextCompat.getDrawable(
+                            root.context,
+                            R.drawable.completed_todo_background
+                        )
+                    actionBtnGroup.visibility = View.GONE
+                } else {
+                    rootLayout.background = null
+                    actionBtnGroup.visibility = View.VISIBLE
+                }
+            }
+        }
 
         private fun initializedProperties() {
             if (!actionBtnVisible) {
