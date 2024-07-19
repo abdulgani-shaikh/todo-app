@@ -3,12 +3,16 @@ package com.shaikhabdulgani.todoapp.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.shaikhabdulgani.todoapp.data.model.Todo
 import com.shaikhabdulgani.todoapp.repo.TodoRepo
 import com.shaikhabdulgani.todoapp.util.GeneralEvent
 import com.shaikhabdulgani.todoapp.util.Result
 import com.shaikhabdulgani.todoapp.util.TodoInputEvent
 import com.shaikhabdulgani.todoapp.util.TodoState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SaveTodoViewModel(private val repo: TodoRepo) : ViewModel() {
 
@@ -33,13 +37,17 @@ class SaveTodoViewModel(private val repo: TodoRepo) : ViewModel() {
 
     private fun onInitTodo(id: Long) {
         if (_todoState.value?.id != id) {
-            val todo = repo.getById(id)
-            _todoState.value = _todoState.value?.copy(
-                id = todo.id,
-                title = todo.title,
-                subtitle = todo.subtitle,
-                isCompleted = todo.isCompleted,
-            )
+            viewModelScope.launch(Dispatchers.IO) {
+                val todo = repo.getById(id)
+                withContext(Dispatchers.Main){
+                    _todoState.value = _todoState.value?.copy(
+                        id = todo.id,
+                        title = todo.title,
+                        subtitle = todo.subtitle,
+                        isCompleted = todo.isCompleted,
+                    )
+                }
+            }
         }
     }
 
@@ -75,19 +83,23 @@ class SaveTodoViewModel(private val repo: TodoRepo) : ViewModel() {
         ) {
             return
         }
-        val res = repo.save(
-            Todo(
-                id = todoData.id,
-                title = todoData.title,
-                subtitle = todoData.subtitle,
-                isCompleted = todoData.isCompleted,
-                timestamp = System.currentTimeMillis()
+        viewModelScope.launch(Dispatchers.IO) {
+            val res = repo.save(
+                Todo(
+                    id = todoData.id,
+                    title = todoData.title,
+                    subtitle = todoData.subtitle,
+                    isCompleted = todoData.isCompleted,
+                    timestamp = System.currentTimeMillis()
+                )
             )
-        )
-
-        when (res) {
-            is Result.Error -> _generalEvent.value = GeneralEvent.Failed(res.message)
-            is Result.Success -> _generalEvent.value = GeneralEvent.Success("Todo Saved")
+            withContext(Dispatchers.Main){
+                when (res) {
+                    is Result.Error -> _generalEvent.value = GeneralEvent.Failed(res.message)
+                    is Result.Success -> _generalEvent.value = GeneralEvent.Success("Todo Saved")
+                }
+            }
         }
+
     }
 }

@@ -13,11 +13,14 @@ interface TodoDao {
     fun getAllTodo(): LiveData<List<Todo>>
 
     @Query("SELECT * FROM todo_table WHERE id=:id")
-    fun getById(id: Long): Todo
+    suspend fun getById(id: Long): Todo
 
     @Upsert
-    fun save(todo: Todo): Long
+    suspend fun save(todo: Todo): Long
 
     @Delete
-    fun delete(todo: Todo)
+    suspend fun delete(todo: Todo)
+
+    @Query("SELECT * FROM todo_table WHERE timestamp>=:start and timestamp<=:end ORDER BY isCompleted ASC,timestamp DESC")
+    fun getTodoBetween(start: Long, end: Long): LiveData<List<Todo>>
 }

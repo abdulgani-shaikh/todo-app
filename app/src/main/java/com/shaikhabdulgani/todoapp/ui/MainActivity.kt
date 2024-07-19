@@ -119,16 +119,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpToolbar() {
         setSupportActionBar(binding.loginToolbar.toolbarDefault)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Login"
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-            }
-        }
-        return super.onOptionsItemSelected(item)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 }
