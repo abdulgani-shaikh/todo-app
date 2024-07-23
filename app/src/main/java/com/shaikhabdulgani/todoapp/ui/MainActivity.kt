@@ -3,9 +3,7 @@ package com.shaikhabdulgani.todoapp.ui
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.shaikhabdulgani.todoapp.R
@@ -37,16 +35,16 @@ class MainActivity : AppCompatActivity() {
         setUpObserver()
         setUpTextWatcher()
 
-        binding.loginBtn.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             viewModel.onEvent(UserInputEvent.Submit)
         }
     }
 
     private fun setUpTextWatcher() {
-        binding.usernameEdt.doOnTextChanged { text, _, _, _ ->
+        binding.edtUsername.doOnTextChanged { text, _, _, _ ->
             viewModel.onEvent(UserInputEvent.UsernameChange(text.toString()))
         }
-        binding.passwordEdt.doOnTextChanged { text, _, _, _ ->
+        binding.edtPassword.doOnTextChanged { text, _, _, _ ->
             viewModel.onEvent(UserInputEvent.PasswordChange(text.toString()))
         }
     }
@@ -54,15 +52,15 @@ class MainActivity : AppCompatActivity() {
     private fun setUpObserver() {
         viewModel.loginState.observe(this) {
             if (it.usernameError.isBlank()) {
-                binding.usernameEdt.error = null
+                binding.edtUsername.error = null
             } else {
-                binding.usernameEdt.error = it.usernameError
+                binding.edtUsername.error = it.usernameError
             }
 
             if (it.passwordError.isBlank()) {
-                binding.passwordEdt.error = null
+                binding.edtPassword.error = null
             } else {
-                binding.passwordEdt.error = it.passwordError
+                binding.edtPassword.error = it.passwordError
             }
         }
 
@@ -118,7 +116,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpToolbar() {
-        setSupportActionBar(binding.loginToolbar.toolbarDefault)
+        setSupportActionBar(binding.tbLogin.toolbarDefault)
         supportActionBar?.title = "Login"
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }

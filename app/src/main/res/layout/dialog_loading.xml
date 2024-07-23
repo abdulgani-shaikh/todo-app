@@ -13,7 +13,7 @@
         android:padding="20dp"
         >
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/pb_dialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@id/progressBar"
+            app:layout_constraintStart_toEndOf="@id/pb_dialog"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />

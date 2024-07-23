@@ -9,37 +9,37 @@
     tools:context=".ui.MainActivity">
 
     <include
-        android:id="@+id/loginToolbar"
+        android:id="@+id/tb_login"
         layout="@layout/appbar_default"/>
 
     <EditText
-        android:id="@+id/username_edt"
+        android:id="@+id/edt_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/username"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/loginToolbar"
+        app:layout_constraintTop_toBottomOf="@id/tb_login"
         app:layout_constraintStart_toStartOf="parent"
         style="@style/EditTextDefaultStyle"
         />
 
     <EditText
-        android:id="@+id/password_edt"
+        android:id="@+id/edt_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/username_edt"
+        app:layout_constraintTop_toBottomOf="@id/edt_username"
         app:layout_constraintStart_toStartOf="parent"
         style="@style/EditTextDefaultStyle"
         />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/login_btn"
+        android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sign_in"
-        app:layout_constraintTop_toBottomOf="@id/password_edt"
+        app:layout_constraintTop_toBottomOf="@id/edt_password"
         style="@style/ButtonDefaultStyle"
         />
 

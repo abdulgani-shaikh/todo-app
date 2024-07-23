@@ -11,7 +11,7 @@
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/root_layout"
+        android:id="@+id/layout_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/default_horizontal_space"
@@ -19,73 +19,73 @@
         >
 
         <TextView
-            android:id="@+id/todo_title_text"
+            android:id="@+id/tv_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             tools:text="TODO TITLE"
             style="@style/TodoTitleStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/todo_barrier"
+            app:layout_constraintEnd_toStartOf="@id/br_todo"
             />
 
         <TextView
-            android:id="@+id/todo_subtitle_text"
+            android:id="@+id/tv_subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             tools:text="TODO SUBTITLE"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/todo_title_text"
-            app:layout_constraintEnd_toStartOf="@id/todo_barrier"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintEnd_toStartOf="@id/br_todo"
             style="@style/TodoSubtitleStyle"
             />
 
         <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/todo_barrier"
+            android:id="@+id/br_todo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="edit_btn"
+            app:constraint_referenced_ids="btn_edit"
             app:barrierDirection="left"
             />
 
         <ImageButton
-            android:id="@+id/edit_btn"
+            android:id="@+id/btn_edit"
             android:src="@drawable/ic_pencil"
             android:contentDescription="@string/edit_button"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/todo_barrier"
-            app:layout_constraintEnd_toStartOf="@id/delete_btn"
+            app:layout_constraintStart_toEndOf="@id/br_todo"
+            app:layout_constraintEnd_toStartOf="@id/btn_delete"
             app:layout_constraintBottom_toBottomOf="parent"
             style="@style/IconButtonStyle"
             />
 
         <ImageButton
-            android:id="@+id/delete_btn"
+            android:id="@+id/btn_delete"
             android:src="@drawable/ic_trash"
             android:contentDescription="@string/delete_button"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/edit_btn"
-            app:layout_constraintEnd_toStartOf="@id/complete_btn"
+            app:layout_constraintStart_toEndOf="@id/btn_edit"
+            app:layout_constraintEnd_toStartOf="@id/btn_complete"
             app:layout_constraintBottom_toBottomOf="parent"
             style="@style/IconButtonStyle"
             />
 
         <ImageButton
-            android:id="@+id/complete_btn"
+            android:id="@+id/btn_complete"
             android:src="@drawable/ic_check_circle"
             android:contentDescription="@string/check_button"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/delete_btn"
+            app:layout_constraintStart_toEndOf="@id/btn_delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             style="@style/IconButtonStyle"
             />
 
         <androidx.constraintlayout.widget.Group
-            android:id="@+id/action_btn_group"
+            android:id="@+id/group_action_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="edit_btn,complete_btn,delete_btn"
+            app:constraint_referenced_ids="btn_edit,btn_complete"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

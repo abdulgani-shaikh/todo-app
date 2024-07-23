@@ -39,7 +39,7 @@ class ActivityAddTodo : AppCompatActivity() {
         setUpProgressDialog()
         setUpObservers()
 
-        binding.addTodoBtn.setOnClickListener {
+        binding.btnAddTodo.setOnClickListener {
             viewmodel.onEvent(TodoInputEvent.Submit)
         }
     }
@@ -48,15 +48,15 @@ class ActivityAddTodo : AppCompatActivity() {
         viewmodel.todoState.observe(this) {
             binding.apply {
                 if (it.titleError.isBlank()) {
-                    titleAddEdt.error = null
+                    edtTitleAdd.error = null
                 } else {
-                    titleAddEdt.error = it.titleError
+                    edtTitleAdd.error = it.titleError
                 }
 
                 if (it.subtitleError.isBlank()) {
-                    subtitleAddEdt.error = null
+                    edtSubtitleAdd.error = null
                 } else {
-                    subtitleAddEdt.error = it.subtitleError
+                    edtSubtitleAdd.error = it.subtitleError
                 }
             }
         }
@@ -81,10 +81,10 @@ class ActivityAddTodo : AppCompatActivity() {
     }
 
     private fun setUpTextWatcher() {
-        binding.titleAddEdt.doOnTextChanged { text, _, _, _ ->
+        binding.edtTitleAdd.doOnTextChanged { text, _, _, _ ->
             viewmodel.onEvent(TodoInputEvent.TitleChange(text.toString()))
         }
-        binding.subtitleAddEdt.doOnTextChanged { text, _, _, _ ->
+        binding.edtSubtitleAdd.doOnTextChanged { text, _, _, _ ->
             viewmodel.onEvent(TodoInputEvent.SubtitleChange(text.toString()))
         }
     }
@@ -117,7 +117,7 @@ class ActivityAddTodo : AppCompatActivity() {
     }
 
     private fun setUpToolbar() {
-        setSupportActionBar(binding.addTodoToolbar.toolbarDefault)
+        setSupportActionBar(binding.tbAddTodo.toolbarDefault)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Add Todo"
     }

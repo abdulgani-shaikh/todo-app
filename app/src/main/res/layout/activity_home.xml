@@ -8,23 +8,24 @@
     tools:context=".ui.ActivityHome">
 
     <include
-        android:id="@+id/appbar_home"
+        android:id="@+id/tb_home"
         layout="@layout/appbar_all_todo"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/all_todo_rv"
+        android:id="@+id/rv_all_todo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:overScrollMode="never"
         android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/appbar_home"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavView"
+        app:layout_constraintTop_toBottomOf="@id/tb_home"
+        app:layout_constraintBottom_toTopOf="@id/bnv_home"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:paddingBottom="@dimen/default_vertical_space"
         />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/add_todo_fab"
+        android:id="@+id/fab_add_todo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_horizontal_space"
@@ -35,31 +36,31 @@
         android:layout_gravity="bottom|end"
         app:shapeAppearanceOverlay="@style/FabRounded"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavView"/>
+        app:layout_constraintBottom_toTopOf="@id/bnv_home"/>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/clear_filter_fab"
+        android:id="@+id/fab_clear_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_horizontal_space"
         android:backgroundTint="@color/primaryColor"
         android:contentDescription="@string/add_todo"
-        app:icon="@drawable/ic_calender"
+        app:icon="@drawable/ic_calendar_clear"
         android:text="@string/clear_date_filter"
         android:layout_gravity="bottom|end"
         app:shapeAppearanceOverlay="@style/FabRounded"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/add_todo_fab"/>
+        app:layout_constraintBottom_toTopOf="@id/fab_add_todo"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavView"
+        android:id="@+id/bnv_home"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="bottom"
         app:menu="@menu/bottom_nav_menu"
         app:itemActiveIndicatorStyle="@null"
         app:itemTextAppearanceActiveBoldEnabled="false"
-        app:layout_constraintTop_toBottomOf="@id/all_todo_rv"
+        app:layout_constraintTop_toBottomOf="@id/rv_all_todo"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
