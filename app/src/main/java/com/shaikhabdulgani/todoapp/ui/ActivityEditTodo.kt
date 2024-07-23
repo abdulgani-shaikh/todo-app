@@ -42,10 +42,10 @@ class ActivityEditTodo : AppCompatActivity() {
         setUpProgressDialog()
         setUpObservers()
 
-        binding.updateTodoBtn.setOnClickListener {
+        binding.btnUpdateTodo.setOnClickListener {
             updateTodo()
         }
-        binding.cancelTodoBtn.setOnClickListener {
+        binding.btnCancelTodo.setOnClickListener {
             finish()
         }
 
@@ -68,22 +68,22 @@ class ActivityEditTodo : AppCompatActivity() {
     private fun setUpObservers() {
         viewmodel.todoState.observe(this) {
             binding.apply {
-                if (titleEditEdt.text.toString() != it.title) {
-                    titleEditEdt.setText(it.title)
+                if (edtTitle.text.toString() != it.title) {
+                    edtTitle.setText(it.title)
                 }
-                if (subtitleEditEdt.text.toString() != it.subtitle) {
-                    subtitleEditEdt.setText(it.subtitle)
+                if (edtSubtitle.text.toString() != it.subtitle) {
+                    edtSubtitle.setText(it.subtitle)
                 }
                 if (it.titleError.isBlank()) {
-                    titleEditEdt.error = null
+                    edtTitle.error = null
                 } else {
-                    titleEditEdt.error = it.titleError
+                    edtTitle.error = it.titleError
                 }
 
                 if (it.subtitleError.isBlank()) {
-                    subtitleEditEdt.error = null
+                    edtSubtitle.error = null
                 } else {
-                    subtitleEditEdt.error = it.subtitleError
+                    edtSubtitle.error = it.subtitleError
                 }
             }
         }
@@ -108,10 +108,10 @@ class ActivityEditTodo : AppCompatActivity() {
     }
 
     private fun setUpTextWatcher() {
-        binding.titleEditEdt.doOnTextChanged { text, _, _, _ ->
+        binding.edtTitle.doOnTextChanged { text, _, _, _ ->
             viewmodel.onEvent(TodoInputEvent.TitleChange(text.toString()))
         }
-        binding.subtitleEditEdt.doOnTextChanged { text, _, _, _ ->
+        binding.edtSubtitle.doOnTextChanged { text, _, _, _ ->
             viewmodel.onEvent(TodoInputEvent.SubtitleChange(text.toString()))
         }
     }
@@ -148,7 +148,7 @@ class ActivityEditTodo : AppCompatActivity() {
     }
 
     private fun setUpToolbar() {
-        setSupportActionBar(binding.editTodoToolbar.toolbarDefault)
+        setSupportActionBar(binding.tbEditTodo.toolbarDefault)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Edit Todo"
     }

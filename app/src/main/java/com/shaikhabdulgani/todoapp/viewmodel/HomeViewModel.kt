@@ -8,16 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.shaikhabdulgani.todoapp.data.model.Todo
 import com.shaikhabdulgani.todoapp.repo.TodoRepo
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class HomeViewModel(private val todoRepo: TodoRepo) : ViewModel() {
-    //    private val _todo = MutableStateFlow<List<Todo>>(emptyList())
-//    val todo: StateFlow<List<Todo>>
-//        get() = _todo
+
     private val _todo = MutableLiveData<List<Todo>>(emptyList())
     val todo: LiveData<List<Todo>>
         get() = _todo

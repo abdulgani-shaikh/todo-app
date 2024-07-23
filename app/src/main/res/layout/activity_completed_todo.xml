@@ -8,11 +8,11 @@
     tools:context=".ui.ActivityCompletedTodo">
 
     <include
-        android:id="@+id/toolbar_complete"
+        android:id="@+id/tb_complete"
         layout="@layout/appbar_default"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/completed_todo_rv"
+        android:id="@+id/rv_completed_todo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"

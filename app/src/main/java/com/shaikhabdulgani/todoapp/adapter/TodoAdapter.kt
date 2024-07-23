@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -87,42 +88,41 @@ class TodoAdapter(private val actionBtnVisible: Boolean = true) :
     inner class TodoViewHolder(private val binding: ItemTodoBinding) : ViewHolder(binding.root) {
         fun bind(todo: Todo) {
             binding.apply {
-                todoTitleText.text = todo.title
-                todoSubtitleText.text = todo.subtitle
+                tvTitle.text = todo.title
+                tvSubtitle.text = todo.subtitle
                 if (todo.isCompleted) {
-                    rootLayout.background =
+                    root.background =
                         ContextCompat.getDrawable(
                             root.context,
                             R.drawable.completed_todo_background
                         )
-                    actionBtnGroup.visibility = View.GONE
+                    groupActionBtn.visibility = View.GONE
                 } else {
-                    rootLayout.background = null
-                    actionBtnGroup.visibility = View.VISIBLE
+                    root.background = null
+                    groupActionBtn.isVisible = true
                 }
             }
         }
 
         private fun initializedProperties() {
             if (!actionBtnVisible) {
-                binding.actionBtnGroup.visibility = View.GONE
-                return
+                binding.groupActionBtn.visibility = View.GONE
             }
-            binding.editBtn.setOnClickListener {
+            binding.btnEdit.setOnClickListener {
                 if (adapterPosition == NO_POSITION) {
                     return@setOnClickListener
                 }
                 listener.onEditClick(adapterPosition)
             }
 
-            binding.deleteBtn.setOnClickListener {
+            binding.btnDelete.setOnClickListener {
                 if (adapterPosition == NO_POSITION) {
                     return@setOnClickListener
                 }
                 listener.onDeleteClick(adapterPosition)
             }
 
-            binding.completeBtn.setOnClickListener {
+            binding.btnComplete.setOnClickListener {
                 if (adapterPosition == NO_POSITION) {
                     return@setOnClickListener
                 }

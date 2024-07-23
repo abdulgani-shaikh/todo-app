@@ -9,45 +9,45 @@
     tools:context=".ui.ActivityEditTodo">
 
     <include
-        android:id="@+id/edit_todo_toolbar"
+        android:id="@+id/tb_edit_todo"
         layout="@layout/appbar_default"/>
 
     <EditText
-        android:id="@+id/title_edit_edt"
+        android:id="@+id/edt_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:importantForAutofill="no"
-        app:layout_constraintTop_toBottomOf="@id/edit_todo_toolbar"
+        app:layout_constraintTop_toBottomOf="@id/tb_edit_todo"
         android:hint="@string/hint_title"
         style="@style/EditTextDefaultStyle"
         />
 
     <EditText
-        android:id="@+id/subtitle_edit_edt"
+        android:id="@+id/edt_subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_subtitle"
-        app:layout_constraintTop_toBottomOf="@id/title_edit_edt"
+        app:layout_constraintTop_toBottomOf="@id/edt_title"
         style="@style/EditTextDefaultStyle"
         />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/update_todo_btn"
+        android:id="@+id/btn_update_todo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/subtitle_edit_edt"
+        app:layout_constraintTop_toBottomOf="@id/edt_subtitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/cancel_todo_btn"
+        app:layout_constraintEnd_toStartOf="@id/btn_cancel_todo"
         android:text="@string/update"
         style="@style/ButtonDefaultStyle"
         />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/cancel_todo_btn"
+        android:id="@+id/btn_cancel_todo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/subtitle_edit_edt"
-        app:layout_constraintStart_toEndOf="@id/update_todo_btn"
+        app:layout_constraintTop_toBottomOf="@id/edt_subtitle"
+        app:layout_constraintStart_toEndOf="@id/btn_update_todo"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/cancel"
         style="@style/ButtonDefaultStyle"

@@ -2,13 +2,12 @@ package com.shaikhabdulgani.todoapp.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.shaikhabdulgani.todoapp.R
@@ -19,8 +18,6 @@ import com.shaikhabdulgani.todoapp.databinding.ActivityHomeBinding
 import com.shaikhabdulgani.todoapp.repo.TodoRepo
 import com.shaikhabdulgani.todoapp.viewmodel.HomeViewModel
 import com.shaikhabdulgani.todoapp.viewmodel.factory.HomeViewModelFactory
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.days
 
 class ActivityHome : AppCompatActivity() {
@@ -46,7 +43,7 @@ class ActivityHome : AppCompatActivity() {
         setUpToolbar()
 
 
-        binding.bottomNavView.setOnItemSelectedListener {
+        binding.bnvHome.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.completed_todo_menu_item -> {
                     Intent(this, ActivityCompletedTodo::class.java).apply {
@@ -62,8 +59,8 @@ class ActivityHome : AppCompatActivity() {
 
     private fun setUpTodoRecycler() {
         todoAdapter = TodoAdapter()
-        binding.allTodoRv.layoutManager = LinearLayoutManager(this)
-        binding.allTodoRv.adapter = todoAdapter
+        binding.rvAllTodo.layoutManager = LinearLayoutManager(this)
+        binding.rvAllTodo.adapter = todoAdapter
     }
 
     private fun setUpViewModel() {
@@ -74,13 +71,6 @@ class ActivityHome : AppCompatActivity() {
 
     private fun setUpObserver() {
         viewModel.getAllTodo()
-//        lifecycleScope.launch {
-//            viewModel.todo.collect {
-//                Log.d(TAG,it.toString())
-////                todoAdapter.differList.submitList(it)
-//                todoAdapter.setList(it)
-//            }
-//        }
         viewModel.todo.observe(this){
             todoAdapter.setList(it)
         }
@@ -91,7 +81,6 @@ class ActivityHome : AppCompatActivity() {
             setTitle("Delete Todo")
             setMessage("Are you sure you want to delete this todo")
             setPositiveButton("Yes") { _, _ ->
-//                viewModel.deleteTodo(todoAdapter.differList.currentList[position])
                 viewModel.deleteTodo(todoAdapter.getItem(position))
             }
             setNegativeButton("No") { dialog, _ ->
@@ -116,14 +105,16 @@ class ActivityHome : AppCompatActivity() {
     }
 
     private fun setUpClickListener() {
-        binding.addTodoFab.setOnClickListener {
+        binding.fabClearFilter.isVisible = false
+        binding.fabAddTodo.setOnClickListener {
             Intent(binding.root.context, ActivityAddTodo::class.java).also {
                 startActivity(it)
             }
         }
 
-        binding.clearFilterFab.setOnClickListener {
+        binding.fabClearFilter.setOnClickListener {
             viewModel.getAllTodo()
+            binding.fabClearFilter.isVisible = false
         }
 
         todoAdapter.setOnCLickListener(object : TodoAdapter.TodoClickListener {
@@ -151,13 +142,14 @@ class ActivityHome : AppCompatActivity() {
         val datePicker = builder.build()
         datePicker.addOnPositiveButtonClickListener {
             viewModel.getAllTodo(it.first, it.second + 1.days.inWholeMilliseconds)
+            binding.fabClearFilter.isVisible = true
         }
 
         datePicker.show(supportFragmentManager, "DATE_PICKER")
     }
 
     private fun setUpToolbar() {
-        setSupportActionBar(binding.appbarHome.toolbarHome)
+        setSupportActionBar(binding.tbHome.toolbarHome)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
