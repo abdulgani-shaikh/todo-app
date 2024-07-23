@@ -91,14 +91,14 @@ class TodoAdapter(private val actionBtnVisible: Boolean = true) :
                 tvTitle.text = todo.title
                 tvSubtitle.text = todo.subtitle
                 if (todo.isCompleted) {
-                    root.background =
+                    layoutRoot.background =
                         ContextCompat.getDrawable(
                             root.context,
                             R.drawable.completed_todo_background
                         )
                     groupActionBtn.visibility = View.GONE
                 } else {
-                    root.background = null
+                    layoutRoot.background = null
                     groupActionBtn.isVisible = true
                 }
             }
